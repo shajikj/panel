@@ -218,19 +218,19 @@ if(isset($_GET['delete_id'])){
             <form method="POST">
                 <div class="form-group">
                     <label>Student Name</label>
-                    <input type="text" name="student_name" placeholder="Enter student name">
+                    <input required type="text" name="student_name" placeholder="Enter student name">
                 </div>
 
                 <div class="form-group">
                     <label>Roll Number</label>
-                    <input type="text" name="roll_number" placeholder="Enter roll number ">
-
-                    </select>
+                    <input required id="roll_no_id" onchange="validate_roll_no()" type="text" name="roll_number" placeholder="Enter roll number ">
+                    <br>
+                    <span id="roll_no_error" style="color:red; display:none;">Roll Number already exists for the selected class.</span>
                 </div>
 
                 <div class="form-group">
                     <label>Class Name</label>
-                    <select name="class_name" class="form-control">
+                    <select onchange="validate_roll_no()" required id="class_id" name="class_name" class="form-control">
                         <option value="">-- Select Class --</option>
                         <?php
                         $select_class_data = mysqli_query($conn, "SELECT * FROM class_master");
@@ -280,5 +280,28 @@ if(isset($_GET['delete_id'])){
     </div>
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 
+<script>
+    function validate_roll_no(){
+        var roll_no = $("#roll_no_id").val();
+        var class_id = $("#class_id").val();
+        if (roll_no != "" && class_id != ""){
+            var data = "validate_roll_no&roll_no="+roll_no+"&class_id="+class_id;
+            $.ajax({
+                type:"GET",
+                url:"ajax.php",
+                data:data,
+                success:function(response){
+                    if(response=="exists"){
+                        $("#roll_no_error").show();
+                        $("#roll_no_id").val("");
+                    }else{
+                        $("#roll_no_error").hide();
+                    }
+                }
+            })
+        }
+    }
+</script>
 </html>
