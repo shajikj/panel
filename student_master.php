@@ -10,7 +10,7 @@ if (isset($_POST['submit'])) {
     header("Location: student_master.php");
     exit();
 }
-if(isset($_GET['delete_id'])){
+if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
     $delete_data = mysqli_query($conn, "DELETE FROM student_master WHERE id='$delete_id '");
     header("Location: student_master.php");
@@ -18,7 +18,8 @@ if(isset($_GET['delete_id'])){
 }
 ?>
 <!doctype html>
-<html lang="en">    
+<html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -183,29 +184,31 @@ if(isset($_GET['delete_id'])){
         th {
             background: #f4f4f4;
         }
-         .btn {
-                    padding: 6px 12px;
-                    border: none;
-                    border-radius: 4px;
-                    color: #fff;
-                    cursor: pointer;
-                    font-size: 14px;
-                }
 
-                .update-btn {
-                    background-color: #198132;
-                }
+        .btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-                .delete-btn {
-                    background-color: #e74c3c;
-                    /* red */
-                }
+        .update-btn {
+            background-color: #198132;
+        }
 
-                .btn:hover {
-                    opacity: 0.8;
-                }
+        .delete-btn {
+            background-color: #e74c3c;
+            /* red */
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
+
 <body>
     <?php include "includes/menu.php"; ?>
 
@@ -235,12 +238,12 @@ if(isset($_GET['delete_id'])){
                         <?php
                         $select_class_data = mysqli_query($conn, "SELECT * FROM class_master");
                         while ($fetch_class_data = mysqli_fetch_assoc($select_class_data)) {
-                            echo "<option value = '".$fetch_class_data['id']."'>" . $fetch_class_data['class']."</option>";
+                            echo "<option value = '" . $fetch_class_data['id'] . "'>" . $fetch_class_data['class'] . "</option>";
                             ?>
-                            <?php }?>
+                        <?php } ?>
                     </select>
                 </div>
-                
+
                 <button type="submit" name="submit">Save Details</button>
             </form>
         </div>
@@ -257,7 +260,7 @@ if(isset($_GET['delete_id'])){
                 <?php
                 $select_data = mysqli_query($conn, "SELECT * FROM student_master 
                          INNER JOIN class_master ON student_master.class_id = class_master.id");
-                            // using inner join to fetch subject name and code from subject_master table
+                // using inner join to fetch subject name and code from subject_master table
                 while ($fetch_data = mysqli_fetch_assoc($select_data)) { ?>
                     <tr>
                         <td><?php echo $fetch_data['id']; ?></td>
@@ -265,17 +268,16 @@ if(isset($_GET['delete_id'])){
                         <td><?php echo $fetch_data['roll_number']; ?></td>
                         <td><?php echo $fetch_data['class']; ?></td>
                         <td>
-                                <a href="update_student.php?id=<?php echo $fetch_data['id']; ?>"
-                                    class="btn update-btn">Update</a>
-                               <a href="student_master.php?delete_id=<?php echo $fetch_data['id']; ?>"
-                                    onclick="return confirm('Are you sure you want to delete this data?');"
-                                    class="btn delete-btn">Delete</a>
-                            </td>
+                            <a href="update_student.php?id=<?php echo $fetch_data['id']; ?>"
+                                class="btn update-btn">Update</a>
+                            <a href="student_master.php?delete_id=<?php echo $fetch_data['id']; ?>"
+                                onclick="return confirm('Are you sure you want to delete this data?');"
+                                class="btn delete-btn">Delete</a>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>
         </div>
-
     </div>
     </div>
 
