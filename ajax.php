@@ -12,4 +12,22 @@ if(isset($_GET['validate_roll_no'])){
     } else {
         echo "not_exists";
     }
+    exit();
 }
+
+if(isset($_GET['validate_mark_entry'])){
+    $student_id = $_GET['student_id'];
+    $subject_id = $_GET['subject_id'];
+    $check_mark_data = mysqli_query($conn, "SELECT * FROM mark_entry WHERE student_id='$student_id' AND subject_id='$subject_id'");
+    $count_data = mysqli_num_rows($check_mark_data);
+    if($count_data >= 1){
+        echo "exists";
+    } else {
+        echo "not_exists";
+    }
+    exit();
+}
+
+
+?>
+

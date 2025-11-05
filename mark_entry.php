@@ -23,7 +23,7 @@ if (isset($_GET['delete_id'])) {
     header("Location: mark_entry.php");
     exit();
 }
-?>  
+?>
 
 <!doctype html>
 <html lang="en">
@@ -197,19 +197,22 @@ if (isset($_GET['delete_id'])) {
             <form method="POST">
                 <div class="form-group">
                     <label>Student Name</label>
-                    <select name="student_id" required>
+                    <select name="student_id" id="student_id" onchange="validate_mark_entry()" required>
                         <option value="">--- Select Name ---</option>
                         <?php
                         $sel_student_data = mysqli_query($conn, "SELECT * FROM student_master");
                         while ($student = mysqli_fetch_assoc($sel_student_data)) {
                             echo "<option value='" . $student['id'] . "'>" . $student['student_name'] . "</option>";
                         }
-                        ?> 
-                    </select>
-                </div> 
-                <div class="form-group"> 
+                        ?>
+                    </select><br>
+                    <span id="student_error" style="color:red; display:none;">Student name already exists for the
+                            selected class.</span>
+
+                </div>
+                <div class="form-group">
                     <label>Subject Name</label>
-                    <select name="subject_id" required>
+                    <select name="subject_id" id="subject_id" onchange="validate_mark_entry()" required>
                         <option value="">--- Select Subject ---</option>
                         <?php
                         $select_sub_data = mysqli_query($conn, "SELECT * FROM subject_master");
@@ -217,7 +220,9 @@ if (isset($_GET['delete_id'])) {
                             echo "<option value='" . $subject['id'] . "'>" . $subject['subject_name'] . "</option>";
                         }
                         ?>
-                    </select>
+                    </select><br>
+                    <span id="subject_error" style="color:red; display:none;">Subject name already exists for the
+                            selected class.</span>
                 </div>
                 <input type="hidden" name="from_mark_entry" value="1">
                 <button type="submit" name="submit">Proceed</button>
@@ -334,8 +339,8 @@ if (isset($_GET['delete_id'])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                    $i=0;
+                    <?php
+                    $i = 0;
                     $select_mark_data = mysqli_query($conn, "SELECT mark_entry.id AS mark_id, student_master.student_name, subject_master.subject_name, mark_entry.marks, mark_entry.remarks, mark_entry.student_id FROM mark_entry INNER JOIN student_master ON mark_entry.student_id = student_master.id INNER JOIN subject_master ON mark_entry.subject_id = subject_master.id");
                     while ($fetch_mark_data = mysqli_fetch_assoc($select_mark_data)) {
                         //print_r($fetch_mark_data);
@@ -348,8 +353,8 @@ if (isset($_GET['delete_id'])) {
                             <td><?php echo $fetch_mark_data['marks']; ?></td>
                             <td><?php echo $fetch_mark_data['remarks'] ?></td>
                             <td>
-                                <a href="updatemark.php?id=<?php echo $fetch_mark_data['mark_id']; ?>" class="btn update-btn"
-                                    style="text-decoration: none;">Update</a>
+                                <a href="updatemark.php?id=<?php echo $fetch_mark_data['mark_id']; ?>"
+                                    class="btn update-btn" style="text-decoration: none;">Update</a>
                                 <a href="mark_entry.php?delete_id=<?php echo $fetch_mark_data['mark_id']; ?>"
                                     onclick="return confirm('Are you sure you want to delete this data?');"
                                     class="btn delete-btn" style="text-decoration: none;">Delete</a>
@@ -361,8 +366,33 @@ if (isset($_GET['delete_id'])) {
         </div>
 
     </div>
-    
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    function validate_mark_entry() {
+        var student_id = $("#student_id").val();
+        var subject_id = $("#subject_id").val();
+        if (student_id != "" && subject_id != "") {
+            var data = "validate_mark_entry&student_id=" + student_id + "&subject_id=" + subject_id;
+            $.ajax({
+                type: "GET",
+                url: "ajax.php",
+                data: data,
+                success: function (response) {
+                    if (response == "exists") {
+                        $("#student_error").show();
+                        $("#student_id").val("");
+                        $("#subject_error").show("");
+                        $("#subject_id").val("");
+                    } else {
+                        $("#student_error").hide();
+                    }
+                }
+
+            })
+        }
+    }
+</script>
 
 </html>
