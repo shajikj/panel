@@ -23,7 +23,7 @@ if (isset($_GET['delete_id'])) {
     header("Location: mark_entry.php");
     exit();
 }
-?>  
+?>
 
 <!doctype html>
 <html lang="en">
@@ -204,10 +204,10 @@ if (isset($_GET['delete_id'])) {
                         while ($student = mysqli_fetch_assoc($sel_student_data)) {
                             echo "<option value='" . $student['id'] . "'>" . $student['student_name'] . "</option>";
                         }
-                        ?> 
+                        ?>
                     </select>
-                </div> 
-                <div class="form-group"> 
+                </div>
+                <div class="form-group">
                     <label>Subject Name</label>
                     <select name="subject_id" required>
                         <option value="">--- Select Subject ---</option>
@@ -334,8 +334,8 @@ if (isset($_GET['delete_id'])) {
                     </tr>
                 </thead>
                 <tbody>
-                    <?php 
-                    $i=0;
+                    <?php
+                    $i = 0;
                     $select_mark_data = mysqli_query($conn, "SELECT mark_entry.id AS mark_id, student_master.student_name, subject_master.subject_name, mark_entry.marks, mark_entry.remarks, mark_entry.student_id FROM mark_entry INNER JOIN student_master ON mark_entry.student_id = student_master.id INNER JOIN subject_master ON mark_entry.subject_id = subject_master.id");
                     while ($fetch_mark_data = mysqli_fetch_assoc($select_mark_data)) {
                         //print_r($fetch_mark_data);
@@ -348,8 +348,8 @@ if (isset($_GET['delete_id'])) {
                             <td><?php echo $fetch_mark_data['marks']; ?></td>
                             <td><?php echo $fetch_mark_data['remarks'] ?></td>
                             <td>
-                                <a href="updatemark.php?id=<?php echo $fetch_mark_data['mark_id']; ?>" class="btn update-btn"
-                                    style="text-decoration: none;">Update</a>
+                                <a href="updatemark.php?id=<?php echo $fetch_mark_data['mark_id']; ?>"
+                                    class="btn update-btn" style="text-decoration: none;">Update</a>
                                 <a href="mark_entry.php?delete_id=<?php echo $fetch_mark_data['mark_id']; ?>"
                                     onclick="return confirm('Are you sure you want to delete this data?');"
                                     class="btn delete-btn" style="text-decoration: none;">Delete</a>
@@ -361,7 +361,7 @@ if (isset($_GET['delete_id'])) {
         </div>
 
     </div>
-    
+
 
 </body>
 
