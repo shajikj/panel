@@ -8,7 +8,7 @@ if (isset($_POST['submit'])) {
     header("Location: subject_master");
 }
 
-if(isset($_GET['id'])){
+if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $subjectname = $_POST['subject_name'];
     $subjectcode = $_POST['subject_code'];
@@ -27,7 +27,7 @@ if (isset($_GET['delete_id'])) {
 
 <!doctype html>
 <html lang="en">
-  
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -186,16 +186,20 @@ if (isset($_GET['delete_id'])) {
             <form method="POST">
                 <div class="form-group">
                     <label>Subject Name</label>
-                   <input type="text" name="subject_name" placeholder="Enter Subject Name">
+                    <input required id="subject_id" type="text" onchange="validate_sub_id()" name="subject_name"
+                        placeholder="Enter Subject Name"><br>
+                    <span id="subject_error">This field already exists</span>
                 </div>
                 <div class="form-group">
-                    <label >Subject Code</label>
-                  <input type="text" name="subject_code" placeholder="Enter Subject Code">
+                    <label>Subject Code</label>
+                    <input required id="subject_code" type="text" onchange="validate_sub_id()" name="subject_code"
+                        placeholder="Enter Subject Code"><br>
+                    <span id="subject_code_error">This field is already exists</span>
                 </div>
                 <button type="submit" name="submit">Save</button>
             </form>
         </div>
-         <div>
+        <div>
             <style>
                 body {
                     font-family: Arial, sans-serif;
@@ -301,30 +305,56 @@ if (isset($_GET['delete_id'])) {
                         <th>Actions</th>
                     </tr>
                 </thead>
-                <tbody>   
+                <tbody>
 
-                <?php 
-                   $sel_student_data = mysqli_query($conn, "SELECT * FROM subject_master");
-                   while($fetch_data = mysqli_fetch_assoc($sel_student_data)){
-                    //print_r($fetch_data);
-                ?>
+                    <?php
+                    $sel_student_data = mysqli_query($conn, "SELECT * FROM subject_master");
+                    while ($fetch_data = mysqli_fetch_assoc($sel_student_data)) {
+                        //print_r($fetch_data);
+                        ?>
                         <tr>
                             <td><?php echo $fetch_data['id']; ?></td>
                             <td><?php echo $fetch_data['subject_name']; ?></td>
                             <td><?php echo $fetch_data['subject_code']; ?></td>
                             <td>
-                                <a href="update_subject.php?id=<?php echo $fetch_data['id']; ?>"
-                                    class="btn update-btn" style="text-decoration: none;">Update</a>
-                               <a href="subject_master.php?delete_id=<?php echo $fetch_data['id']; ?>"
+                                <a href="update_subject.php?id=<?php echo $fetch_data['id']; ?>" class="btn update-btn"
+                                    style="text-decoration: none;">Update</a>
+                                <a href="subject_master.php?delete_id=<?php echo $fetch_data['id']; ?>"
                                     onclick="return confirm('Are you sure you want to delete this data?');"
                                     class="btn delete-btn" style="text-decoration: none;">Delete</a>
                             </td>
                         </tr>
-                     <?php } ?> 
+                    <?php } ?>
                 </tbody>
             </table>
         </div>
     </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+<script>
+    function validate_sub_id() {
+        var subject_id = $("#subject_id").val();
+        var subject_code = $("#subject_code").val();
+        if (subject_id != "" && subject_code != "") {
+            var data = "validate_sub_id&subject_id=" + subject_id + "&subject_code=" + subject_code;
+            $.ajax({
+                type: "GET",
+                url: "ajax.php",
+                data: data,
+                success: function (response) {
+                    if (response == "exists") {
+                        $("#subject_error").show();
+                        $("#subject_id").val("");
+                        $("#subject_code_error").show();
+                        $("#subject_code").val("");
+                    } else {
+                        $("#subject_error").hide();
+                        $("#subject_code_error").hide();
+                    }
+                }
+            })
+        }
+    }
+</script>
 
 </html>

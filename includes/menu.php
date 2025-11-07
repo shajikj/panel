@@ -25,24 +25,49 @@
 <script>
     function showPage(page, event) {
         event.preventDefault();
-        // hide all
+
+        // hide all sections (only if they exist)
         document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-        // show selected
-        document.getElementById('page-' + page).style.display = 'block';
-        // update title
-        document.getElementById('page-title').textContent =
-            page.charAt(0).toUpperCase() + page.slice(1).replace('-', ' ');
-        // set active menu
+
+        // show selected page (check if it exists)
+        const selectedPage = document.getElementById('page-' + page);
+        if (selectedPage) {
+            selectedPage.style.display = 'block';
+        }
+
+        // update title (if exists)
+        const pageTitle = document.getElementById('page-title');
+        if (pageTitle) {
+            pageTitle.textContent = page.charAt(0).toUpperCase() + page.slice(1).replace('-', ' ');
+        }
+
+        // update sidebar menu highlight
         document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
         event.currentTarget.classList.add('active');
     }
 
     window.onload = function () {
+        // hide all .page sections (safe check)
         document.querySelectorAll('.page').forEach(p => p.style.display = 'none');
-        document.getElementById('page-dashboard').style.display = 'block';
-        // reset active menu
+
+        // only show dashboard if element exists
+        const dashboardPage = document.getElementById('page-dashboard');
+        if (dashboardPage) {
+            dashboardPage.style.display = 'block';
+        }
+
+        // highlight the Dashboard menu
         document.querySelectorAll('.menu a').forEach(a => a.classList.remove('active'));
-        document.querySelector('.menu a[href="dashboard.php"]').classList.add('active');
-        document.getElementById('page-title').textContent = "Dashboard";
+
+        const dashboardLink = document.querySelector('.menu a[href="dashboard.php"]');
+        if (dashboardLink) {
+            dashboardLink.classList.add('active');
+        }
+
+        // update the title safely
+        const title = document.getElementById('page-title');
+        if (title) {
+            title.textContent = "Dashboard";
+        }
     }
 </script>
