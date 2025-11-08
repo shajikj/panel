@@ -13,9 +13,9 @@ if (isset($_POST['submit'])) {
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
     $delete_data = mysqli_query($conn, "DELETE FROM student_master WHERE id='$delete_id '");
-    header("Location: student_master.php");
+    header("Location: student_master.php"); 
     exit();
-}
+} 
 ?>
 <!doctype html>
 <html lang="en">

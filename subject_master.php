@@ -186,15 +186,15 @@ if (isset($_GET['delete_id'])) {
             <form method="POST">
                 <div class="form-group">
                     <label>Subject Name</label>
-                    <input required id="subject_id" type="text" onchange="validate_sub_id()" name="subject_name"
+                    <input required id="subject_name" type="text" onchange="validate_sub_id()" name="subject_name"
                         placeholder="Enter Subject Name"><br>
-                    <span id="subject_error">This field already exists</span>
+                    <span id="subject_error" style="display: none; color: red;">This field already exists</span>
                 </div>
                 <div class="form-group">
                     <label>Subject Code</label>
                     <input required id="subject_code" type="text" onchange="validate_sub_id()" name="subject_code"
                         placeholder="Enter Subject Code"><br>
-                    <span id="subject_code_error">This field is already exists</span>
+                    <span id="subject_code_error" style="display: none; color: red;">This field is already exists</span>
                 </div>
                 <button type="submit" name="submit">Save</button>
             </form>
@@ -345,7 +345,7 @@ if (isset($_GET['delete_id'])) {
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <script>
     function validate_sub_id() {
-        var subject_id = $("#subject_id").val();
+        var subject_id = $("#subject_name").val();
         var subject_code = $("#subject_code").val();
         if (subject_id != "" && subject_code != "") {
             var data = "validate_sub_id&subject_id=" + subject_id + "&subject_code=" + subject_code;
@@ -356,7 +356,7 @@ if (isset($_GET['delete_id'])) {
                 success: function (response) {
                     if (response == "exists") {
                         $("#subject_error").show();
-                        $("#subject_id").val("");
+                        $("#subject_name").val("");
                         $("#subject_code_error").show();
                         $("#subject_code").val("");
                     } else {
@@ -367,7 +367,6 @@ if (isset($_GET['delete_id'])) {
             })
         }
     }
-
 
     function update_sub_name(ID, NAME) {
         selectorID = "subjectID" + ID;

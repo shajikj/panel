@@ -10,7 +10,7 @@ if (isset($_GET['validate_roll_no'])) {
     if ($count_data >= 1) {
         echo "exists";
     } else {
-        echo "not_exists";
+        echo "not_exists"; 
     }
     exit();
 }
@@ -28,10 +28,10 @@ if (isset($_GET['validate_mark_entry'])) {
     exit();
 }
 
-if (isset($get['validate_sub_id'])) {
+if (isset($_GET['validate_sub_id'])) {
     $subject_name = $_GET['subject_name'];
     $subject_code = $_GET['subject_code'];
-    $check_sub_data = mysqli_query($conn, "SELECT * FROM subject_master WHERE subject_name = 'subject_name' AND subject_code = '$subject_code'");
+    $check_sub_data = mysqli_query($conn, "SELECT * FROM subject_master WHERE subject_name = '$subject_name' AND subject_code = '$subject_code'");
     $count_data = mysqli_num_rows($check_sub_data);
     if ($count_data >= 1) {
         echo "exists";
