@@ -314,8 +314,20 @@ if (isset($_GET['delete_id'])) {
                         ?>
                         <tr>
                             <td><?php echo $fetch_data['id']; ?></td>
-                            <td><?php echo $fetch_data['subject_name']; ?></td>
-                            <td><?php echo $fetch_data['subject_code']; ?></td>
+
+                            <td ondblclick="update_sub_name(<?php echo $fetch_data['id'];?>, '<?php echo $fetch_data['subject_name']; ?>')">
+
+                                <span id="subjectID<?php echo $fetch_data['id']; ?>" >
+                                    <?php echo $fetch_data['subject_name']; ?>
+                                </span>
+                            </td>
+
+                            <td ondblclick="update_sub_code(<?php echo $fetch_data['id']; ?>, '<?php echo $fetch_data['subject_code']?>')">
+                                 <span id="subcodeID<?php echo $fetch_data['id']; ?>">
+                                     <?php echo $fetch_data['subject_code']; ?>
+                                 </span>
+                                </td>
+
                             <td>
                                 <a href="update_subject.php?id=<?php echo $fetch_data['id']; ?>" class="btn update-btn"
                                     style="text-decoration: none;">Update</a>
@@ -354,6 +366,19 @@ if (isset($_GET['delete_id'])) {
                 }
             })
         }
+    }
+
+
+    function update_sub_name(ID, NAME) {
+        selectorID = "subjectID" + ID;
+        console.log(selectorID);
+        $("#" + selectorID).html("<input type = 'text' class = 'subject_name' value = '"+ NAME + "'>");
+    }
+
+    function update_sub_code(ID, CODE) {
+        selectorID = "subcodeID" + ID;
+        console.log(selectorID);
+        $("#" + selectorID).html("<input type = 'text' class = 'subject_code' value = '"+ CODE +"'>");
     }
 </script>
 

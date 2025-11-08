@@ -238,7 +238,12 @@ if(isset($_GET['delete_id'])){
                 while ($fetch_class_data = mysqli_fetch_assoc($select_class_data)) { ?>
                     <tr>
                         <td><?php echo $fetch_class_data['id']; ?></td>
-                        <td><?php echo $fetch_class_data['class']?></td>
+
+                        <td ondblclick="update_class(<?php echo $fetch_class_data['id']; ?>, '<?php echo $fetch_class_data['class']; ?>')">
+
+                            <span id="classID<?php echo $fetch_class_data['id']; ?>">     <?php $fetch_class_data['class']; ?>
+                                <?php echo $fetch_class_data['class']; ?>  
+                            </span>
                         <td>
                                 <a href="update_class.php?id=<?php echo $fetch_class_data['id']; ?>"
                                     class="btn update-btn">Update</a>
@@ -255,5 +260,14 @@ if(isset($_GET['delete_id'])){
     </div>
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
+<script>
+    function update_class(ID, CLASS) {
+       selectorID = "classID" + ID;
+       console.log(selectorID);
+       $("#" + selectorID).html("<input type = 'text' name = 'class' value = '"+ CLASS +"' >");
+    }
+</script>
 
 </html>

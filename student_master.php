@@ -289,8 +289,7 @@ if (isset($_GET['delete_id'])) {
                              <span id="classID<?php echo $fetch_data['id']; ?>">
                                  <?php echo $fetch_data['class']; ?>
                              </span>
-                                 
-                             </td>
+                        </td>
 
                         <td>
                             <a href="update_student.php?id=<?php echo $fetch_data['id']; ?>"
@@ -349,7 +348,7 @@ if (isset($_GET['delete_id'])) {
     function update_class_name(ID, CLASS) {
       selectorID = "classID" + ID;
       console.log(selectorID);
-      $("#" + selectorID).html("<input type = 'text' name = 'class_name' value = '" + CLASS + "'>");
+      $("#" + selectorID).html("<input type = 'text' name = 'class' value = '" + CLASS + "'>");
     }
 </script>
 
