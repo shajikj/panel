@@ -356,13 +356,13 @@ if (isset($_GET['delete_id'])) {
 
     }
     function change_roll_no(ID, ROLL) {
-        var data = "update_roll_no&roll_no="+ROLL+"&id="+ID;
+        var data = "update_roll_no&roll_no="+bROLL+"&id="+ID;
         $.ajax({
             type:"GET",
             url: "ajax.php",
             data:data,
             success: function(response) {
-                alert("ok");
+                // alert("ok");
             }
         })
     }

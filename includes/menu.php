@@ -1,4 +1,3 @@
-<!-- sidebar.php -->
 <nav class="sidebar" id="sidebar">
     <h2>Admin Panel</h2>
     <ul class="menu">

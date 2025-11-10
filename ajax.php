@@ -8,9 +8,9 @@ if (isset($_GET['validate_roll_no'])) {
     $check_roll_data = mysqli_query($conn, "SELECT * FROM student_master WHERE roll_number='$roll_no' AND class_id='$class_id'");
     $count_data = mysqli_num_rows($check_roll_data);
     if ($count_data >= 1) {
-        echo "exists"; 
+        echo "exists";
     } else {
-        echo "not_exists"; 
+        echo "not_exists";
     }
     exit();
 }
@@ -53,27 +53,25 @@ if (isset($_GET['update_student_name'])) {
     exit();
 }
 
-
 if (isset($_GET['update_roll_no'])) {
     $id = $_GET['id'];
     $roll_no = $_GET['roll_no'];
     $update_stu_data = mysqli_query($conn, "UPDATE student_master SET roll_number = '$roll_no' WHERE id = '$id'");
     if ($update_stu_data) {
         echo "Roll number is updated";
-    } else{
+    } else {
         echo "error";
     }
     exit();
 }
 
-
 if (isset($_GET['update_class_name'])) {
     $id = $_GET['id'];
     $class_name = $_GET['class_name'];
-    $update_stu_data = mysqli_query($conn, "UPDATE student_master SET class_name = '$class_name'");
+    $update_stu_data = mysqli_query($conn, "UPDATE student_master SET class_name = '$class_name' WHERE id = '$id'");
     if ($update_stu_data) {
         echo "Class name is updated";
-    } else{
+    } else {
         echo "Error";
     }
     exit();
