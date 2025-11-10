@@ -334,21 +334,54 @@ if (isset($_GET['delete_id'])) {
     function update_student_name(ID, NAME) {
         selectorID = "studentnameID" + ID;
          console.log(selectorID);
-        $("#" + selectorID).html("<input type='text' name='student_name' value='" + NAME + "'>");
-        // $("#studentnameID1")
+        $("#" + selectorID).html("<input onchange='change_name(" + ID + ", this.value)' type='text' name='student_name' value='" + NAME + "'>");
+    }
+    function change_name(ID,NAME){
+        var data = "update_student_name&name="+NAME+"&id="+ID;
+        $.ajax({
+            type:"GET",
+            url:"ajax.php",
+            data:data,
+            success: function(response){
+                alert("OOK Running");
+            }
+        })
+
     }
 
     function update_roll_no(ID, ROLL){
         selectorID = "rollnumberID" + ID;
         console.log(selectorID);
-        $("#" + selectorID).html("<input type = 'text' name = 'roll_number' value = '" + ROLL + "'>");
+        $("#" + selectorID).html("<input onchange = 'change_roll_no("+ ID +", this.value)' type = 'text' name = 'roll_no' value = '"+ ROLL +"'>");
 
+    }
+    function change_roll_no(ID, ROLL) {
+        var data = "update_roll_no&roll_no="+ROLL+"&id="+ID;
+        $.ajax({
+            type:"GET",
+            url: "ajax.php",
+            data:data,
+            success: function(response) {
+                alert("ok");
+            }
+        })
     }
 
     function update_class_name(ID, CLASS) {
       selectorID = "classID" + ID;
       console.log(selectorID);
-      $("#" + selectorID).html("<input type = 'text' name = 'class' value = '" + CLASS + "'>");
+      $("#" + selectorID).html("<input onchange = 'change_class("+ID +", this.value)' type = 'text' name = 'class_name' value = '"+CLASS+"'>");
+    }
+    function change_class(ID, CLASS) {
+        var data = "update_class_name&class_name="+CLASS+"&id="+ID;
+        $.ajax({
+            type: "GET",
+            url: "ajax.php",
+            data: data,
+            success: function(response){
+                alert("ok");
+            }
+        })
     }
 </script>
 
