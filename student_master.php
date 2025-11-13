@@ -266,10 +266,15 @@ if (isset($_GET['delete_id'])) {
                 <?php
                 $select_data = mysqli_query($conn, "SELECT * FROM student_master 
                          INNER JOIN class_master ON student_master.class_id = class_master.id");
+                         $i = 0;
                 // using inner join to fetch subject name and code from subject_master table
-                while ($fetch_data = mysqli_fetch_assoc($select_data)) { ?>
+                while ($fetch_data = mysqli_fetch_assoc($select_data)) { 
+                    $i++;
+                    ?>
                     <tr>
-                        <td><?php echo $fetch_data['id']; ?></td>
+                        <td><input type="hidden" name="studentID_<?php echo $i; ?>" value="<?php echo $fetch_data['id']; ?>">
+                        <?php echo $i; ?></td>
+
                         <td
                             ondblclick="update_student_name(<?php echo $fetch_data['id']; ?>,'<?php echo $fetch_data['student_name']; ?>')">
                             <span id="studentnameID<?php echo $fetch_data['id']; ?>">

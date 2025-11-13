@@ -78,5 +78,4 @@ if (isset($_GET['update_class_name'])) {
 
 }
 
-
 ?>

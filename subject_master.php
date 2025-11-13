@@ -181,7 +181,7 @@ if (isset($_GET['delete_id'])) {
         <div class="header">
             <h2>Subject Master</h2>
         </div>
-        
+
         <div class="card">
             <form method="POST">
                 <div class="form-group">
@@ -309,24 +309,30 @@ if (isset($_GET['delete_id'])) {
 
                     <?php
                     $sel_student_data = mysqli_query($conn, "SELECT * FROM subject_master");
+                    $i = 0;
                     while ($fetch_data = mysqli_fetch_assoc($sel_student_data)) {
+                        $i++;
                         //print_r($fetch_data);
                         ?>
                         <tr>
-                            <td><?php echo $fetch_data['id']; ?></td>
+                            <td> <input type="hidden" name="subjectID_<?php echo $i; ?>"
+                                    value="<?php echo $fetch_data['id']; ?>">
+                                <?php echo $i; ?></td>
 
-                            <td ondblclick="update_sub_name(<?php echo $fetch_data['id'];?>, '<?php echo $fetch_data['subject_name']; ?>')">
+                            <td
+                                ondblclick="update_sub_name(<?php echo $fetch_data['id']; ?>, '<?php echo $fetch_data['subject_name']; ?>')">
 
-                                <span id="subjectID<?php echo $fetch_data['id']; ?>" >
+                                <span id="subjectID<?php echo $fetch_data['id']; ?>">
                                     <?php echo $fetch_data['subject_name']; ?>
                                 </span>
                             </td>
 
-                            <td ondblclick="update_sub_code(<?php echo $fetch_data['id']; ?>, '<?php echo $fetch_data['subject_code']?>')">
-                                 <span id="subcodeID<?php echo $fetch_data['id']; ?>">
-                                     <?php echo $fetch_data['subject_code']; ?>
-                                 </span>
-                                </td>
+                            <td
+                                ondblclick="update_sub_code(<?php echo $fetch_data['id']; ?>, '<?php echo $fetch_data['subject_code'] ?>')">
+                                <span id="subcodeID<?php echo $fetch_data['id']; ?>">
+                                    <?php echo $fetch_data['subject_code']; ?>
+                                </span>
+                            </td>
 
                             <td>
                                 <a href="update_subject.php?id=<?php echo $fetch_data['id']; ?>" class="btn update-btn"
@@ -371,13 +377,13 @@ if (isset($_GET['delete_id'])) {
     function update_sub_name(ID, NAME) {
         selectorID = "subjectID" + ID;
         console.log(selectorID);
-        $("#" + selectorID).html("<input type = 'text' class = 'subject_name' value = '"+ NAME + "'>");
+        $("#" + selectorID).html("<input type = 'text' class = 'subject_name' value = '" + NAME + "'>");
     }
 
     function update_sub_code(ID, CODE) {
         selectorID = "subcodeID" + ID;
         console.log(selectorID);
-        $("#" + selectorID).html("<input type = 'text' class = 'subject_code' value = '"+ CODE +"'>");
+        $("#" + selectorID).html("<input type = 'text' class = 'subject_code' value = '" + CODE + "'>");
     }
 </script>
 

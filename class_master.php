@@ -235,9 +235,13 @@ if(isset($_GET['delete_id'])){
 
                 <?php
                 $select_class_data = mysqli_query($conn, "SELECT * FROM class_master");// using inner join to fetch subject name and code from subject_master table 
-                while ($fetch_class_data = mysqli_fetch_assoc($select_class_data)) { ?>
+                $i = 0;
+                while ($fetch_class_data = mysqli_fetch_assoc($select_class_data)) {
+                    $i++;
+                    ?>
                     <tr>
-                        <td><?php echo $fetch_class_data['id']; ?></td>
+                        <td><input type="hidden" name="classID_<?php echo $i;?>" value="<?php echo $fetch_class_data['id']?>">
+                            <?php echo $i; ?></td>
 
                         <td ondblclick="update_class(<?php echo $fetch_class_data['id']; ?>, '<?php echo $fetch_class_data['class']; ?>')">
 

@@ -42,5 +42,8 @@
                Marks Entry
             </a>
         </li>
+        <li>
+            <a href="work_space.php" class="<?=basename($_SERVER['PHP_SELF'])== 'work_space.php' ? 'active' : ''?>">Work Space</a>
+        </li>
     </ul>
 </nav>

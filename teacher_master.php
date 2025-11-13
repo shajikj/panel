@@ -206,6 +206,7 @@ if (isset($_GET['delete_id'])) {
         }
     </style>
 </head>
+
 <body>
 
     <?php include "includes/menu.php"; ?>
@@ -214,13 +215,13 @@ if (isset($_GET['delete_id'])) {
         <div class="header">
             <h2>Teacher Master</h2>
         </div>
-<?php
+        <?php
 
-if(isset($_GET['error'])){
-    echo "<p style='color:red;'>".$_GET['error']."</p>";
+        if (isset($_GET['error'])) {
+            echo "<p style='color:red;'>" . $_GET['error'] . "</p>";
 
-}
-?>
+        }
+        ?>
         <div class="card">
             <form method="POST">
                 <div class="form-group">
@@ -239,7 +240,7 @@ if(isset($_GET['error'])){
 
                         <?php } ?>
                     </select>
-                </div>
+                </div>z
 
                 <div class="form-group">
                     <label>Contact Number</label>
@@ -265,42 +266,48 @@ if(isset($_GET['error'])){
 
                 <?php
                 $select_data = mysqli_query($conn, "SELECT teacher_master.id AS teacher_id, teacher_master.teacher_name, teacher_master.contact_number, teacher_master.email, subject_master.subject_name FROM teacher_master INNER JOIN subject_master ON teacher_master.subject_id = subject_master.id");
+                $i = 0;
                 // using inner join to fetch subject name from subject_master table to teacher_master table.
-                while ($fetch_data = mysqli_fetch_assoc($select_data)) { ?>
+                while ($fetch_data = mysqli_fetch_assoc($select_data)) { 
+                    $i++;
+                    ?>
                     <tr>
-                        <td><?php echo $fetch_data['teacher_id']; ?></td>
+                        <td><?php echo $i; ?></td>
 
-                        <td ondblclick="update_teacher_name(<?php echo $fetch_data['teacher_id'];?>, '<?php echo $fetch_data['teacher_name']; ?>')">
-                              <span id="teacherID<?php echo $fetch_data['teacher_id'];?>">
-                                  <?php echo $fetch_data['teacher_name']; ?>
-                              </span>
-                            
-                                
+                        <td
+                            ondblclick="update_teacher_name(<?php echo $fetch_data['teacher_id']; ?>, '<?php echo $fetch_data['teacher_name']; ?>')">
+                            <span id="teacherID<?php echo $fetch_data['teacher_id']; ?>">
+                                <?php echo $fetch_data['teacher_name']; ?>
+                            </span>
+
                         </td>
 
-                        <td ondblclick="update_sub_name(<?php echo $fetch_data['teacher_id']; ?>, '<?php echo $fetch_data['subject_name']; ?>')">
+                        <td
+                            ondblclick="update_sub_name(<?php echo $fetch_data['teacher_id']; ?>, '<?php echo $fetch_data['subject_name']; ?>')">
                             <span id="subjectID<?php echo $fetch_data['teacher_id']; ?>">
                                 <?php echo $fetch_data['subject_name']; ?>
                             </span>
-                            
 
-                        <td ondblclick="update_cod_no(<?php echo $fetch_data['teacher_id'];?>, <?php echo $fetch_data['contact_number']; ?>)">
-                             <span id="contactID<?php echo $fetch_data['teacher_id']; ?>">
-                                 <?php echo $fetch_data['contact_number']; ?>
-                             </span>
+
+                        <td
+                            ondblclick="update_cod_no(<?php echo $fetch_data['teacher_id']; ?>, <?php echo $fetch_data['contact_number']; ?>)">
+                            <span id="contactID<?php echo $fetch_data['teacher_id']; ?>">
+                                <?php echo $fetch_data['contact_number']; ?>
+                            </span>
                         </td>
 
 
-                        <td ondblclick="update_email(<?php echo $fetch_data['teacher_id'];?>, '<?php echo $fetch_data['email']; ?>')">
+                        <td
+                            ondblclick="update_email(<?php echo $fetch_data['teacher_id']; ?>, '<?php echo $fetch_data['email']; ?>')">
                             <span id="emailID<?php echo $fetch_data['teacher_id']; ?>">
-                              <?php echo $fetch_data['email']; ?>  
+                                <?php echo $fetch_data['email']; ?>
                             </span>
-                                
-                            </td>
+
+                        </td>
 
                         <td>
-                            <a href="update_teacher.php?id=<?php echo $fetch_data['teacher_id']; ?>"
-                                class="btn update-btn" style="text-decoration: none;">Update</a>
+                            <a href="update_teacher.php?id=<?php echo $fetch_data['teacher_id']; ?>" class="btn update-btn"
+                                style="text-decoration: none;">Update</a>
                             <a href="teacher_master.php?delete_id=<?php echo $fetch_data['teacher_id']; ?>"
                                 onclick="return confirm('Are you sure you want to delete this data?');"
                                 class="btn delete-btn" style="text-decoration: none;">Delete</a>
@@ -314,30 +321,30 @@ if(isset($_GET['error'])){
 </body>
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
- <script>
-     function update_teacher_name(ID, NAME) {
-         selectorID = "teacherID" + ID;
-         console.log(selectorID);
-         $("#" + selectorID).html("<input type = 'text' class = 'teacher_name' value = '"+ NAME + "'>");
-     }
+<script>
+    function update_teacher_name(ID, NAME) {
+        selectorID = "teacherID" + ID;
+        console.log(selectorID);
+        $("#" + selectorID).html("<input type = 'text' class = 'teacher_name' value = '" + NAME + "'>");
+    }
 
-     function update_sub_name(ID, SUB) {
-         selectorID = "subjectID" + ID;
-         console.log(selectorID);
-         $("#" + selectorID).html("<input type = 'text' class = 'subject_name' value = '"+ SUB + "'>");
-     }
+    function update_sub_name(ID, SUB) {
+        selectorID = "subjectID" + ID;
+        console.log(selectorID);
+        $("#" + selectorID).html("<input type = 'text' class = 'subject_name' value = '" + SUB + "'>");
+    }
 
-     function update_cod_no(ID, NO) {
-         selectorID = "contactID" + ID;
-         console.log(selectorID);
-         $("#" + selectorID).html("<input type = 'text' class = 'contact_number' value = '"+ NO +"'>");
-     }
+    function update_cod_no(ID, NO) {
+        selectorID = "contactID" + ID;
+        console.log(selectorID);
+        $("#" + selectorID).html("<input type = 'text' class = 'contact_number' value = '" + NO + "'>");
+    }
 
-     function update_email(ID, EMAIL) {
+    function update_email(ID, EMAIL) {
         selectorID = "emailID" + ID;
         console.log(selectorID);
-        $("#" + selectorID).html("<input type = 'text' class = 'email' value = '"+ EMAIL +"'>");
-     }
- </script>
+        $("#" + selectorID).html("<input type = 'text' class = 'email' value = '" + EMAIL + "'>");
+    }
+</script>
 
 </html>
