@@ -240,7 +240,7 @@ if (isset($_GET['delete_id'])) {
 
                         <?php } ?>
                     </select>
-                </div>z
+                </div>
 
                 <div class="form-group">
                     <label>Contact Number</label>

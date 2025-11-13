@@ -207,7 +207,8 @@ if (isset($_GET['delete_id'])) {
                         ?>
                     </select><br>
                     <span id="student_error" style="color:red; display:none;">Student name already exists for the
-                        selected class.</span>
+                        selected class.
+                    </span>
 
                 </div>
                 <div class="form-group">
@@ -372,6 +373,7 @@ if (isset($_GET['delete_id'])) {
                             $auto_remarks = "Poor";
                         }
                         ?>
+
                         <tr>
                             <td><?php echo $i; ?></td>
                             <td><?php echo $fetch_mark_data['student_name']; ?></td>

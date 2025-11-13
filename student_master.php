@@ -13,9 +13,9 @@ if (isset($_POST['submit'])) {
 if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
     $delete_data = mysqli_query($conn, "DELETE FROM student_master WHERE id='$delete_id '");
-    header("Location: student_master.php"); 
+    header("Location: student_master.php");
     exit();
-} 
+}
 ?>
 <!doctype html>
 <html lang="en">
@@ -208,7 +208,7 @@ if (isset($_GET['delete_id'])) {
         }
 
         #roll_no_id {
-            border: 1px solid red;
+            /* border: 1px solid red; */
         }
     </style>
 </head>
@@ -218,7 +218,7 @@ if (isset($_GET['delete_id'])) {
 
     <div class="content">
         <div class="header">
-            <h2>Subject Master</h2>
+            <h2>Student Master</h2>
         </div>
 
         <div class="card">
@@ -266,14 +266,15 @@ if (isset($_GET['delete_id'])) {
                 <?php
                 $select_data = mysqli_query($conn, "SELECT * FROM student_master 
                          INNER JOIN class_master ON student_master.class_id = class_master.id");
-                         $i = 0;
+                $i = 0;
                 // using inner join to fetch subject name and code from subject_master table
-                while ($fetch_data = mysqli_fetch_assoc($select_data)) { 
+                while ($fetch_data = mysqli_fetch_assoc($select_data)) {
                     $i++;
                     ?>
                     <tr>
-                        <td><input type="hidden" name="studentID_<?php echo $i; ?>" value="<?php echo $fetch_data['id']; ?>">
-                        <?php echo $i; ?></td>
+                        <td><input type="hidden" name="studentID_<?php echo $i; ?>"
+                                value="<?php echo $fetch_data['id']; ?>">
+                            <?php echo $i; ?></td>
 
                         <td
                             ondblclick="update_student_name(<?php echo $fetch_data['id']; ?>,'<?php echo $fetch_data['student_name']; ?>')">
@@ -283,17 +284,17 @@ if (isset($_GET['delete_id'])) {
                         </td>
 
                         <td
-                             ondblclick="update_roll_no(<?php echo $fetch_data['id']; ?>,'<?php echo $fetch_data['roll_number']; ?>')">
+                            ondblclick="update_roll_no(<?php echo $fetch_data['id']; ?>,'<?php echo $fetch_data['roll_number']; ?>')">
                             <span id="rollnumberID<?php echo $fetch_data['id']; ?>">
                                 <?php echo $fetch_data['roll_number']; ?>
                             </span>
                         </td>
-                        
-                        <td 
-                             ondblclick="update_class_name(<?php echo $fetch_data['id'];?>, '<?php echo $fetch_data['class']; ?>')">
-                             <span id="classID<?php echo $fetch_data['id']; ?>">
-                                 <?php echo $fetch_data['class']; ?>
-                             </span>
+
+                        <td
+                            ondblclick="update_class_name(<?php echo $fetch_data['id']; ?>, '<?php echo $fetch_data['class']; ?>')">
+                            <span id="classID<?php echo $fetch_data['id']; ?>">
+                                <?php echo $fetch_data['class']; ?>
+                            </span>
                         </td>
 
                         <td>
@@ -338,52 +339,52 @@ if (isset($_GET['delete_id'])) {
     }
     function update_student_name(ID, NAME) {
         selectorID = "studentnameID" + ID;
-         console.log(selectorID);
+        console.log(selectorID);
         $("#" + selectorID).html("<input onchange='change_name(" + ID + ", this.value)' type='text' name='student_name' value='" + NAME + "'>");
     }
-    function change_name(ID,NAME){
-        var data = "update_student_name&name="+NAME+"&id="+ID;
+    function change_name(ID, NAME) {
+        var data = "update_student_name&name=" + NAME + "&id=" + ID;
         $.ajax({
-            type:"GET",
-            url:"ajax.php",
-            data:data,
-            success: function(response){
+            type: "GET",
+            url: "ajax.php",
+            data: data,
+            success: function (response) {
                 alert("OOK Running");
             }
         })
 
     }
 
-    function update_roll_no(ID, ROLL){
+    function update_roll_no(ID, ROLL) {
         selectorID = "rollnumberID" + ID;
         console.log(selectorID);
-        $("#" + selectorID).html("<input onchange = 'change_roll_no("+ ID +", this.value)' type = 'text' name = 'roll_no' value = '"+ ROLL +"'>");
+        $("#" + selectorID).html("<input onchange = 'change_roll_no(" + ID + ", this.value)' type = 'text' name = 'roll_no' value = '" + ROLL + "'>");
 
     }
     function change_roll_no(ID, ROLL) {
-        var data = "update_roll_no&roll_no="+ROLL+"&id="+ID;
+        var data = "update_roll_no&roll_no=" + ROLL + "&id=" + ID;
         $.ajax({
-            type:"GET",
+            type: "GET",
             url: "ajax.php",
-            data:data,
-            success: function(response) {
+            data: data,
+            success: function (response) {
                 // alert("ok");
             }
         })
     }
 
     function update_class_name(ID, CLASS) {
-      selectorID = "classID" + ID;
-      console.log(selectorID);
-      $("#" + selectorID).html("<input onchange = 'change_class("+ID +", this.value)' type = 'text' name = 'class_name' value = '"+CLASS+"'>");
+        selectorID = "classID" + ID;
+        console.log(selectorID);
+        $("#" + selectorID).html("<input onchange = 'change_class(" + ID + ", this.value)' type = 'text' name = 'class_name' value = '" + CLASS + "'>");
     }
     function change_class(ID, CLASS) {
-        var data = "update_class_name&class_name="+CLASS+"&id="+ID;
+        var data = "update_class_name&class_name=" + CLASS + "&id=" + ID;
         $.ajax({
             type: "GET",
             url: "ajax.php",
             data: data,
-            success: function(response){
+            success: function (response) {
                 alert("ok");
             }
         })
