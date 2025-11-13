@@ -181,7 +181,7 @@ if (isset($_GET['delete_id'])) {
         <div class="header">
             <h2>Subject Master</h2>
         </div>
-
+        
         <div class="card">
             <form method="POST">
                 <div class="form-group">
