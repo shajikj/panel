@@ -207,7 +207,7 @@ if (isset($_GET['delete_id'])) {
                         ?>
                     </select><br>
                     <span id="student_error" style="color:red; display:none;">Student name already exists for the
-                            selected class.</span>
+                        selected class.</span>
 
                 </div>
                 <div class="form-group">
@@ -222,7 +222,7 @@ if (isset($_GET['delete_id'])) {
                         ?>
                     </select><br>
                     <span id="subject_error" style="color:red; display:none;">Subject name already exists for the
-                            selected class.</span>
+                        selected class.</span>
                 </div>
                 <input type="hidden" name="from_mark_entry" value="1">
                 <button type="submit" name="submit">Proceed</button>
@@ -330,11 +330,12 @@ if (isset($_GET['delete_id'])) {
             <table>
                 <thead>
                     <tr>
-                        <th>Id</th>
+                        <th>S.No</th>
                         <th>Student Name</th>
                         <th>Subject</th>
                         <th>Marks</th>
                         <th>Remarks</th>
+                        <th>Percentage</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -345,13 +346,39 @@ if (isset($_GET['delete_id'])) {
                     while ($fetch_mark_data = mysqli_fetch_assoc($select_mark_data)) {
                         //print_r($fetch_mark_data);
                         $i++;
+                        $percentage = ($fetch_mark_data['marks'] / 100) * 100;// calculate percentage
+                        //calculate garde
+                        if ($percentage >= 90) {
+                            $grade = "A+";
+                        } elseif ($percentage >= 80) {
+                            $grade = "B";
+                        } elseif ($percentage >= 70) {
+                            $grade = "C-";
+                        } elseif ($percentage >= 60) {
+                            $grade = "D-";
+                        } else {
+                            $grade = "E";
+                        }
+                        // calculate remarks
+                        if ($grade == "A+") {
+                            $auto_remarks = "Excellent";
+                        } elseif ($grade == "B") {
+                            $auto_remarks = "Good";
+                        } elseif ($grade == "C-") {
+                            $auto_remarks = "Improve";
+                        } elseif ($grade == "D-") {
+                            $auto_remarks = "Bad";
+                        } else {
+                            $auto_remarks = "Poor";
+                        }
                         ?>
                         <tr>
                             <td><?php echo $i; ?></td>
                             <td><?php echo $fetch_mark_data['student_name']; ?></td>
                             <td><?php echo $fetch_mark_data['subject_name']; ?></td>
-                            <td><?php echo $fetch_mark_data['marks']; ?></td>
-                            <td><?php echo $fetch_mark_data['remarks'] ?></td>
+                            <td><?php echo $grade; ?></td>
+                            <td><?php echo $auto_remarks; ?></td>
+                            <td><?php echo number_format($percentage, 2) . "%"; ?></td>
                             <td>
                                 <a href="updatemark.php?id=<?php echo $fetch_mark_data['mark_id']; ?>"
                                     class="btn update-btn" style="text-decoration: none;">Update</a>
