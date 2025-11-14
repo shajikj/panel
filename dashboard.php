@@ -1,7 +1,7 @@
 <?php
 include "includes/config.php";
 include "includes/security.php";
-include "function.php";
+include "includes/function.php";
 
 $sub_count = mysqli_query($conn, "SELECT COUNT(*) AS total FROM subject_master");
 $subject_count = mysqli_fetch_assoc($sub_count)['total'];
