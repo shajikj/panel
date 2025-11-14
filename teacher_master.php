@@ -267,7 +267,7 @@ if (isset($_GET['delete_id'])) {
                 $select_data = mysqli_query($conn, "SELECT teacher_master.id AS teacher_id, teacher_master.teacher_name, teacher_master.contact_number, teacher_master.email, subject_master.subject_name FROM teacher_master INNER JOIN subject_master ON teacher_master.subject_id = subject_master.id");
                 $i = 0;
                 // using inner join to fetch subject name from subject_master table to teacher_master table.
-                while ($fetch_data = mysqli_fetch_assoc($select_data)) { 
+                while ($fetch_data = mysqli_fetch_assoc($select_data)) {
                     $i++;
                     ?>
                     <tr>
