@@ -14,7 +14,6 @@ function teacher_master($conn) {
     while($row = mysqli_fetch_assoc($select_teacher_data)) {
         $teachers[] = $row; // store each row in array
     }
-
     return $teachers;
 }
 ?>
@@ -43,4 +42,14 @@ function getRank($conn, $order, $rank) {
     $run = mysqli_query($conn, $query);
     return mysqli_fetch_assoc($run);
 }
+?>
+
+<?php
+   function getclass($conn, $order, $rank) {
+         $orderby = ($order == "highest") ? "DESC" : "ASC";
+         $offset = $rank - 1;
+         $query = "SELECT mark_entry.marks, student_master.student_name FROM mark_entry INNER JOIN student_master ON mark_entry.student.id = student_master.id ORDER BY mark_entry.marks $orderby LIMIT $offset, 1";
+         $run = mysqli_query($conn, $query);
+         return mysqli_fetch_assoc($run);    
+   }
 ?>

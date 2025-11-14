@@ -8,13 +8,13 @@ $subject_count = mysqli_fetch_assoc($sub_count)['total'];
 $stu_count = mysqli_query($conn, "SELECT COUNT(*)  AS total FROM student_master");
 $student_count = mysqli_fetch_assoc($stu_count)['total'];
 
-$first_high  = getRank($conn, "highest", 1);
+$first_high = getRank($conn, "highest", 1);
 $second_high = getRank($conn, "highest", 2);
-$third_high  = getRank($conn, "highest", 3);
+$third_high = getRank($conn, "highest", 3);
 
-$first_low  = getRank($conn, "lowest", 1);
+$first_low = getRank($conn, "lowest", 1);
 $second_low = getRank($conn, "lowest", 2);
-$third_low  = getRank($conn, "lowest", 3);
+$third_low = getRank($conn, "lowest", 3);
 
 ?>
 
@@ -267,19 +267,19 @@ $third_low  = getRank($conn, "lowest", 3);
                 <p><?php echo $third_high['student_name']; ?></p>
             </div>
 
-            <div class="card" style="border-top:5px solid green;">
+            <div class="card" style="border-top:5px solid #1f721f;">
                 <h3>1st Lowest Mark</h3>
                 <p><?php echo $first_low['marks']; ?></p>
                 <p><?php echo $first_low['student_name']; ?></p>
             </div>
 
-            <div class="card" style="border-top:5px solid orange;">
+            <div class="card" style="border-top:5px solid #d37a2f;">
                 <h3>2nd Lowest Mark</h3>
                 <p><?php echo $second_low['marks']; ?></p>
                 <p><?php echo $second_low['student_name']; ?></p>
             </div>
 
-            <div class="card" style="border-top:5px solid purple;">
+            <div class="card" style="border-top:5px solid #de20de;">
                 <h3>3rd Lowest Mark</h3>
                 <p><?php echo $third_low['marks']; ?></p>
                 <p><?php echo $third_low['student_name']; ?></p>
