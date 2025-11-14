@@ -239,12 +239,12 @@ $third_low  = getRank($conn, "lowest", 3);
         </div>
 
         <div class="dashboard">
-            <div class="card">
+            <div class="card" style="border-top:5px solid blue;">
                 <h3>Total Subjects</h3>
                 <p><?php echo $subject_count; ?></p>
             </div>
 
-            <div class="card">
+            <div class="card" style="border-top:5px solid #000;">
                 <h3>Total Students</h3>
                 <p><?php echo $student_count; ?></p>
             </div>
@@ -268,19 +268,19 @@ $third_low  = getRank($conn, "lowest", 3);
             </div>
 
             <div class="card" style="border-top:5px solid green;">
-                <h3>1st Lowest</h3>
+                <h3>1st Lowest Mark</h3>
                 <p><?php echo $first_low['marks']; ?></p>
                 <p><?php echo $first_low['student_name']; ?></p>
             </div>
 
             <div class="card" style="border-top:5px solid orange;">
-                <h3>2nd Lowest</h3>
+                <h3>2nd Lowest Mark</h3>
                 <p><?php echo $second_low['marks']; ?></p>
                 <p><?php echo $second_low['student_name']; ?></p>
             </div>
 
             <div class="card" style="border-top:5px solid purple;">
-                <h3>3rd Lowest</h3>
+                <h3>3rd Lowest Mark</h3>
                 <p><?php echo $third_low['marks']; ?></p>
                 <p><?php echo $third_low['student_name']; ?></p>
             </div>
