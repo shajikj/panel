@@ -219,7 +219,6 @@ if (isset($_GET['delete_id'])) {
 
         if (isset($_GET['error'])) {
             echo "<p style='color:red;'>" . $_GET['error'] . "</p>";
-
         }
         ?>
         <div class="card">
@@ -287,16 +286,12 @@ if (isset($_GET['delete_id'])) {
                             <span id="subjectID<?php echo $fetch_data['teacher_id']; ?>">
                                 <?php echo $fetch_data['subject_name']; ?>
                             </span>
-
-
                         <td
                             ondblclick="update_cod_no(<?php echo $fetch_data['teacher_id']; ?>, <?php echo $fetch_data['contact_number']; ?>)">
                             <span id="contactID<?php echo $fetch_data['teacher_id']; ?>">
                                 <?php echo $fetch_data['contact_number']; ?>
                             </span>
                         </td>
-
-
                         <td
                             ondblclick="update_email(<?php echo $fetch_data['teacher_id']; ?>, '<?php echo $fetch_data['email']; ?>')">
                             <span id="emailID<?php echo $fetch_data['teacher_id']; ?>">

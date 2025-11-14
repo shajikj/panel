@@ -1,10 +1,21 @@
 <?php
 include "includes/config.php";
 include "includes/security.php";
-$select_sub_data = mysqli_query($conn, "SELECT * FROM subject_master");
-while ($fetch_sub_data = mysqli_fetch_assoc($select_sub_data)) {
-    //print_r($fetch_sub_data);
-}
+include "function.php";
+
+$sub_count = mysqli_query($conn, "SELECT COUNT(*) AS total FROM subject_master");
+$subject_count = mysqli_fetch_assoc($sub_count)['total'];
+$stu_count = mysqli_query($conn, "SELECT COUNT(*)  AS total FROM student_master");
+$student_count = mysqli_fetch_assoc($stu_count)['total'];
+
+$first_high  = getRank($conn, "highest", 1);
+$second_high = getRank($conn, "highest", 2);
+$third_high  = getRank($conn, "highest", 3);
+
+$first_low  = getRank($conn, "lowest", 1);
+$second_low = getRank($conn, "lowest", 2);
+$third_low  = getRank($conn, "lowest", 3);
+
 ?>
 
 <!doctype html>
@@ -163,6 +174,55 @@ while ($fetch_sub_data = mysqli_fetch_assoc($select_sub_data)) {
         .toggle-btn {
             display: none
         }
+
+        .card.rank-card {
+            background: #ffffff;
+            padding: 25px;
+            border-radius: 14px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
+            text-align: center;
+            transition: 0.3s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card.rank-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 22px rgba(0, 0, 0, 0.18);
+        }
+
+        .card.rank-card .badge {
+            position: absolute;
+            top: -15px;
+            right: -15px;
+            background: #ff4d4d;
+            color: white;
+            padding: 10px 18px;
+            font-size: 14px;
+            font-weight: bold;
+            transform: rotate(20deg);
+            border-radius: 6px;
+        }
+
+        .card.rank-card h3 {
+            font-size: 22px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        .card.rank-card .mark {
+            font-size: 40px;
+            font-weight: bold;
+            color: #ff4d4d;
+            margin: 10px 0;
+        }
+
+        .card.rank-card .student {
+            font-size: 16px;
+            font-weight: 500;
+            color: #555;
+            opacity: 0.8;
+        }
     </style>
 </head>
 
@@ -173,29 +233,56 @@ while ($fetch_sub_data = mysqli_fetch_assoc($select_sub_data)) {
     <div class="content">
         <div class="header">
             <h2>Dashboard</h2>
-             <form action="logout.php" method="post">
-        <button type="submit" name="logout">Log out</button>
-    </form>
+            <form action="logout.php" method="post">
+                <button type="submit" name="logout">Log out</button>
+            </form>
         </div>
 
         <div class="dashboard">
             <div class="card">
                 <h3>Total Subjects</h3>
-                <p>8</p>
+                <p><?php echo $subject_count; ?></p>
             </div>
 
             <div class="card">
                 <h3>Total Students</h3>
-                <p>120</p>
+                <p><?php echo $student_count; ?></p>
             </div>
 
-            <div class="card">
-                <h3>Marks Entered</h3>
-                <p>450</p>
+            <div class="card" style="border-top:5px solid #ff4d4d;">
+                <h3>1st Mark</h3>
+                <p><?php echo $first_high['marks']; ?></p>
+                <p><?php echo $first_high['student_name']; ?></p>
             </div>
-            <div class="card">
-                <h3>Average Grade</h3>
-                <p>B+</p>
+
+            <div class="card" style="border-top:5px solid #3498db;">
+                <h3>2nd Mark</h3>
+                <p><?php echo $second_high['marks']; ?></p>
+                <p><?php echo $second_high['student_name']; ?></p>
+            </div>
+
+            <div class="card" style="border-top:5px solid #2ecc71;">
+                <h3>3rd Mark</h3>
+                <p><?php echo $third_high['marks']; ?></p>
+                <p><?php echo $third_high['student_name']; ?></p>
+            </div>
+
+            <div class="card" style="border-top:5px solid green;">
+                <h3>1st Lowest</h3>
+                <p><?php echo $first_low['marks']; ?></p>
+                <p><?php echo $first_low['student_name']; ?></p>
+            </div>
+
+            <div class="card" style="border-top:5px solid orange;">
+                <h3>2nd Lowest</h3>
+                <p><?php echo $second_low['marks']; ?></p>
+                <p><?php echo $second_low['student_name']; ?></p>
+            </div>
+
+            <div class="card" style="border-top:5px solid purple;">
+                <h3>3rd Lowest</h3>
+                <p><?php echo $third_low['marks']; ?></p>
+                <p><?php echo $third_low['student_name']; ?></p>
             </div>
         </div>
     </div>
