@@ -267,7 +267,7 @@ $third_low = getRank($conn, "lowest", 3);
                 <p><?php echo $third_high['marks']; ?></p>
                 <p><?php echo $third_high['student_name']; ?></p>
             </div>
-
+            
             <div class="card" style="border-top:5px solid #1f721f;">
                 <h3>1st Lowest Mark</h3>
                 <p><?php echo $first_low['marks']; ?></p>

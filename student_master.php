@@ -219,7 +219,6 @@ if (isset($_GET['delete_id'])) {
     <div class="content">
         <div class="header">
             <h2>Student Master</h2>
-            
         </div>
 
         <div class="card">

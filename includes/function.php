@@ -26,7 +26,6 @@ function student_master($conn)
     }
     return $student;
 }
-
 function getRank($conn, $order, $rank)
 {
     // ASC = lowest, DESC = highest
@@ -37,6 +36,10 @@ function getRank($conn, $order, $rank)
     $run = mysqli_query($conn, $query);
     return mysqli_fetch_assoc($run);
 }
+ 
+
+
+
 ?>
 
 

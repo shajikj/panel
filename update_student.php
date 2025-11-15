@@ -1,13 +1,6 @@
 <?php
 include "includes/config.php";
 include "includes/security.php";
-
-// if (isset($_GET['id'])) {
-//     $id = $_GET['id'];
-//     $student_data = mysqli_query($conn, "SELECT * FROM student_master WHERE id='$id'");
-//     $fetch_stu_data = mysqli_fetch_assoc($student_data);
-// }
-
 if(isset($_GET['id'])) {
     $id = $_GET['id'];
     $student_data = mysqli_query($conn, "SELECT * FROM student_master INNER JOIN class_master ON student_master.class_id = class_master.id WHERE student_master.id = $id");
@@ -23,7 +16,6 @@ if (isset($_POST['update'])) {
     $update_stu_data = mysqli_query($conn, " UPDATE student_master  SET student_name='$student_name',  roll_number='$rollnumber', class_id='$classname', subject_code='$subject_code' WHERE id='$id'");
     header("Location: student_master.php");
     exit();
-
 }
 
 ?>
