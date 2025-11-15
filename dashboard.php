@@ -7,6 +7,7 @@ $sub_count = mysqli_query($conn, "SELECT COUNT(*) AS total FROM subject_master")
 $subject_count = mysqli_fetch_assoc($sub_count)['total'];
 $stu_count = mysqli_query($conn, "SELECT COUNT(*)  AS total FROM student_master");
 $student_count = mysqli_fetch_assoc($stu_count)['total'];
+$id = "total_mark_data";
 
 $first_high = getRank($conn, "highest", 1);
 $second_high = getRank($conn, "highest", 2);

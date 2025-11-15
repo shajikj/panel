@@ -1,18 +1,18 @@
 <?php
 include "includes/config.php";
-if(isset($_POST['submit'])){
+if (isset($_POST['submit'])) {
     $class = $_POST['class'];
     $insert_class_data = mysqli_query($conn, "INSERT INTO class_master (class) VALUES ('$class')");
-    if($insert_class_data){
+    if ($insert_class_data) {
         header("Location: class_master.php");
         exit();
-    } 
+    }
 }
 
-if(isset($_GET['delete_id'])){
+if (isset($_GET['delete_id'])) {
     $delete_id = $_GET['delete_id'];
     $delete_data = mysqli_query($conn, "DELETE FROM class_master WHERE id='$delete_id'");
-    if($delete_data){
+    if ($delete_data) {
         header("Location: class_master.php");
         exit();
     }
@@ -20,7 +20,8 @@ if(isset($_GET['delete_id'])){
 ?>
 
 <!doctype html>
-<html lang="en">    
+<html lang="en">
+
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
@@ -171,7 +172,7 @@ if(isset($_GET['delete_id'])){
 
         table,
         th,
-        
+
         td {
             border: 1px solid #333;
         }
@@ -185,29 +186,31 @@ if(isset($_GET['delete_id'])){
         th {
             background: #f4f4f4;
         }
-         .btn {
-                    padding: 6px 12px;
-                    border: none;
-                    border-radius: 4px;
-                    color: #fff;
-                    cursor: pointer;
-                    font-size: 14px;
-                }
 
-                .update-btn {
-                    background-color: #198132;
-                }
+        .btn {
+            padding: 6px 12px;
+            border: none;
+            border-radius: 4px;
+            color: #fff;
+            cursor: pointer;
+            font-size: 14px;
+        }
 
-                .delete-btn {
-                    background-color: #e74c3c;
-                    /* red */
-                }
+        .update-btn {
+            background-color: #198132;
+        }
 
-                .btn:hover {
-                    opacity: 0.8;
-                }
+        .delete-btn {
+            background-color: #e74c3c;
+            /* red */
+        }
+
+        .btn:hover {
+            opacity: 0.8;
+        }
     </style>
 </head>
+
 <body>
     <?php include "includes/menu.php"; ?>
 
@@ -240,21 +243,23 @@ if(isset($_GET['delete_id'])){
                     $i++;
                     ?>
                     <tr>
-                        <td><input type="hidden" name="classID_<?php echo $i;?>" value="<?php echo $fetch_class_data['id']?>">
+                        <td><input type="hidden" name="classID_<?php echo $i; ?>"
+                                value="<?php echo $fetch_class_data['id'] ?>">
                             <?php echo $i; ?></td>
 
-                        <td ondblclick="update_class(<?php echo $fetch_class_data['id']; ?>, '<?php echo $fetch_class_data['class']; ?>')">
+                        <td
+                            ondblclick="update_class(<?php echo $fetch_class_data['id']; ?>, '<?php echo $fetch_class_data['class']; ?>')">
 
-                            <span id="classID<?php echo $fetch_class_data['id']; ?>">     <?php $fetch_class_data['class']; ?>
-                                <?php echo $fetch_class_data['class']; ?>  
+                            <span id="classID<?php echo $fetch_class_data['id']; ?>"> <?php $fetch_class_data['class']; ?>
+                                <?php echo $fetch_class_data['class']; ?>
                             </span>
                         <td>
-                                <a href="update_class.php?id=<?php echo $fetch_class_data['id']; ?>"
-                                    class="btn update-btn">Update</a>
-                               <a href="class_master.php?delete_id=<?php echo $fetch_class_data['id']; ?>"
-                                    onclick="return confirm('Are you sure you want to delete this data?');"
-                                    class="btn delete-btn">Delete</a>
-                            </td>
+                            <a href="update_class.php?id=<?php echo $fetch_class_data['id']; ?>"
+                                class="btn update-btn">Update</a>
+                            <a href="class_master.php?delete_id=<?php echo $fetch_class_data['id']; ?>"
+                                onclick="return confirm('Are you sure you want to delete this data?');"
+                                class="btn delete-btn">Delete</a>
+                        </td>
                     </tr>
                 <?php } ?>
             </table>
@@ -268,9 +273,9 @@ if(isset($_GET['delete_id'])){
 
 <script>
     function update_class(ID, CLASS) {
-       selectorID = "classID" + ID;
-       console.log(selectorID);
-       $("#" + selectorID).html("<input type = 'text' name = 'class' value = '"+ CLASS +"' >");
+        selectorID = "classID" + ID;
+        console.log(selectorID);
+        $("#" + selectorID).html("<input type = 'text' name = 'class' value = '" + CLASS + "' >");
     }
 </script>
 

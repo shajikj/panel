@@ -262,7 +262,6 @@ if (isset($_GET['delete_id'])) {
                     <th>Email</th>
                     <th>Action</th>
                 </tr>
-
                 <?php
                 $select_data = mysqli_query($conn, "SELECT teacher_master.id AS teacher_id, teacher_master.teacher_name, teacher_master.contact_number, teacher_master.email, subject_master.subject_name FROM teacher_master INNER JOIN subject_master ON teacher_master.subject_id = subject_master.id");
                 $i = 0;

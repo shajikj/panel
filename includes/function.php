@@ -4,9 +4,7 @@ function subject_master($conn, $ID)
     $select_sub_data = mysqli_query($conn, "SELECT * FROM subject_master");
     return mysqli_fetch_assoc($select_sub_data);
 }
-?>
 
-<?php
 function teacher_master($conn)
 {
     // Query to get all teachers
@@ -18,9 +16,7 @@ function teacher_master($conn)
     }
     return $teachers;
 }
-?>
 
-<?php
 function student_master($conn)
 {
     $select_student_data = mysqli_query($conn, "SELECT * FROM student_master");
@@ -30,9 +26,7 @@ function student_master($conn)
     }
     return $student;
 }
-?>
 
-<?php
 function getRank($conn, $order, $rank)
 {
     // ASC = lowest, DESC = highest
@@ -43,5 +37,6 @@ function getRank($conn, $order, $rank)
     $run = mysqli_query($conn, $query);
     return mysqli_fetch_assoc($run);
 }
-
 ?>
+
+
