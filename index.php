@@ -180,9 +180,6 @@ if (isset($_POST['submit'])) {
 
     </form>
   </main>
-
-  <h1>heading</h1>
-
   <script>
     (function () {
       const form = document.getElementById('loginForm');
